@@ -63,4 +63,6 @@ public class Main {
             session.close();
         }
     }
+
+    private static void testDAOHibernate(){}
 }
