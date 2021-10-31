@@ -3,11 +3,13 @@ package klassen;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "Reiziger")
 public class Reiziger {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "reiziger_id")
     private int reiziger_id;
     private String voorletters;
@@ -15,10 +17,9 @@ public class Reiziger {
     private String achternaam;
     private Date geboortedatum;
 
-    @OneToOne(mappedBy = "Reiziger")
-    @JoinColumn(name = "addres_id", referencedColumnName = "adres_id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "Adres", referencedColumnName = "adres_id")
     private Adres reizigerAdres;
-//    private ArrayList<OVChipkaart> ovchipkaarten;
 
     public Reiziger(int reiziger_id, String voorletters, String tussenvoegsel, String achternaam, Date geboortedatum) {
         this.reiziger_id = reiziger_id;
@@ -28,71 +29,27 @@ public class Reiziger {
         this.geboortedatum = geboortedatum;
     }
 
-    public Reiziger(){}
-
-    public int getReiziger_id() {
-        return reiziger_id;
+    public Reiziger() {
     }
 
-    public String getVoorletters() {
-        return voorletters;
-    }
-
-    public String getTussenvoegsel() {
-        return tussenvoegsel;
-    }
-
-    public String getAchternaam() {
-        return achternaam;
-    }
-
-    public Date getGeboortedatum() {
-        return geboortedatum;
-    }
-
-    public void setReiziger_id(int reiziger_id) {
-        this.reiziger_id = reiziger_id;
-    }
-
-    public void setVoorletters(String voorletters) {
-        this.voorletters = voorletters;
-    }
-
-    public void setTussenvoegsel(String tussenvoegsel) {
-        this.tussenvoegsel = tussenvoegsel;
-    }
-
-    public void setAchternaam(String achternaam) {
-        this.achternaam = achternaam;
-    }
-
-    public void setGeboortedatum(Date geboortedatum) {
-        this.geboortedatum = geboortedatum;
-    }
-
-    public void setAdres(Adres a){
-        reizigerAdres = a;
-    }
-
-    public Adres getAdres(){
-        return reizigerAdres;
-    }
-
-//    public void setOvchipkaarten(ArrayList<OVChipkaart> ovchipkaarten) {
-//        this.ovchipkaarten = ovchipkaarten;
+//    public void setAdres(Adres a) {
+//        reizigerAdres = a;
 //    }
 //
-//    public ArrayList<OVChipkaart> getOvchipkaarten() {
-//        return ovchipkaarten;
+//    public Adres getAdres() {
+//        return reizigerAdres;
 //    }
 
-    public String toString(){
-        if(tussenvoegsel == null ) {
-            return "#" + reiziger_id + ": " + voorletters + ". " + achternaam + " (" + geboortedatum + ") "
-            + reizigerAdres.toString();
-        } else {
-            return "#" + reiziger_id + ": " + voorletters + ". " + tussenvoegsel + " " + achternaam +
-                    " (" + geboortedatum + ") " + reizigerAdres.toString();
-        }
+
+
+    @Override
+    public String toString() {
+        return "Reiziger{" +
+                "reiziger_id=" + reiziger_id +
+                ", voorletters='" + voorletters + '\'' +
+                ", tussenvoegsel='" + tussenvoegsel + '\'' +
+                ", achternaam='" + achternaam + '\'' +
+                ", geboortedatum=" + geboortedatum +
+                '}';
     }
 }

@@ -11,9 +11,9 @@
              <property name="connection.username">postgres</property>
              <property name="connection.password">T1mmyD3Kat</property>
 
+             <mapping class="klassen.Reiziger"/>
              <mapping class="klassen.Adres"/>
 <!--             <mapping class="klassen.OVChipkaart"/>-->
-             <mapping class="klassen.Reiziger"/>
 <!--             <mapping class="klassen.Product"/>-->
         </session-factory>
         </hibernate-configuration>

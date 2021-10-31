@@ -1,23 +1,18 @@
 package klassen;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Table(name = "ov_chipkaart")
 public class OVChipkaart {
     @Id
-    @Column(name = "kaart_nummer")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public int kaart_nummer;
     public Date geldig_tot;
     public int klasse;
     public double saldo;
     public int reiziger_id;
-//    public Reiziger reiziger;
-//    public Product product;
 
     public OVChipkaart(int kaart_nummer, Date geldig_tot, int klasse, double saldo, int reiziger_id) {
         this.kaart_nummer = kaart_nummer;
@@ -27,66 +22,17 @@ public class OVChipkaart {
         this.reiziger_id = reiziger_id;
     }
 
-    public OVChipkaart(){}
+    public OVChipkaart() {
+    }
 
-//    public int getKaart_nummer() {
-//        return kaart_nummer;
-//    }
-//
-//    public void setKaart_nummer(int kaart_nummer) {
-//        this.kaart_nummer = kaart_nummer;
-//    }
-//
-//    public Date getGeldig_tot() {
-//        return geldig_tot;
-//    }
-//
-//    public void setGeldig_tot(Date geldig_tot) {
-//        this.geldig_tot = geldig_tot;
-//    }
-//
-//    public int getKlasse() {
-//        return klasse;
-//    }
-//
-//    public void setKlasse(int klasse) {
-//        this.klasse = klasse;
-//    }
-//
-//    public float getSaldo() {
-//        return saldo;
-//    }
-//
-//    public void setSaldo(float saldo) {
-//        this.saldo = saldo;
-//    }
-//
-//    public int getReiziger_id() {
-//        return reiziger_id;
-//    }
-//
-//    public void setReiziger_id(int reiziger_id) {
-//        this.reiziger_id = reiziger_id;
-//    }
-
-//    public void setReiziger(Reiziger reiziger) {
-//        this.reiziger = reiziger;
-//    }
-//
-//    public Reiziger getReiziger(){
-//        return reiziger;
-//    }
-//
-//    public void setProduct(Product product) {
-//        this.product = product;
-//    }
-//
-//    public Product getProduct(){
-//        return product;
-//    }
-
-    public String toString(){
-        return "nummer: " + kaart_nummer + "    geldig tot: " + geldig_tot + "    klasse: " + klasse +
-                "    saldo: €" + saldo + "    reiziger_id: " + reiziger_id ;
+    @Override
+    public String toString() {
+        return "OVChipkaart{" +
+                "kaart_nummer=" + kaart_nummer +
+                ", geldig_tot=" + geldig_tot +
+                ", klasse=" + klasse +
+                ", saldo=" + saldo +
+                ", reiziger_id=" + reiziger_id +
+                '}';
     }
 }
