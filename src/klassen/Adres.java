@@ -4,20 +4,21 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "Adres")
+@Table(name = "adres")
 public class Adres {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "adres_id")
+    @Column
     private int adres_id;
     private String postcode;
     private String huisnummer;
     private String straat;
     private String woonplaats;
-
-    @OneToOne(mappedBy = "Reiziger")
     private int reiziger_id;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "reiziger_id", insertable = false, updatable = false)
+    private Reiziger reiziger;
+
 
     public Adres() {
     }
@@ -31,23 +32,24 @@ public class Adres {
         this.reiziger_id = reiziger_id;
     }
 
-    public int getReiziger_id() {
-        return reiziger_id;
+    public Reiziger getReiziger() {
+        return reiziger;
     }
 
-    public void setReiziger_id(int reiziger_id) {
-        this.reiziger_id = reiziger_id;
+    public void setReiziger(Reiziger reiziger) {
+        this.reiziger = reiziger;
     }
 
     @Override
     public String toString() {
         return "Adres{" +
                 "adres_id=" + adres_id +
-                ", postcode='" + postcode + '\'' +
-                ", huisnummer='" + huisnummer + '\'' +
-                ", straat='" + straat + '\'' +
-                ", woonplaats='" + woonplaats + '\'' +
+//                ", postcode='" + postcode + '\'' +
+//                ", huisnummer='" + huisnummer + '\'' +
+//                ", straat='" + straat + '\'' +
+//                ", woonplaats='" + woonplaats + '\'' +
                 ", reiziger_id=" + reiziger_id +
+//                ", reiziger=" + reiziger +
                 '}';
     }
 }

@@ -1,18 +1,29 @@
 package klassen;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "ov_chipkaart")
 public class OVChipkaart {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     public int kaart_nummer;
+
+    @Column
     public Date geldig_tot;
     public int klasse;
     public double saldo;
     public int reiziger_id;
+
+    @ManyToOne
+    @JoinColumn(name = "reiziger_id", insertable = false, updatable = false)
+    private Reiziger reiziger;
+
+
+    @ManyToMany(mappedBy = "ov_chipkaart")
+    private List<Product> producten = new ArrayList<>();
 
     public OVChipkaart(int kaart_nummer, Date geldig_tot, int klasse, double saldo, int reiziger_id) {
         this.kaart_nummer = kaart_nummer;
@@ -25,14 +36,32 @@ public class OVChipkaart {
     public OVChipkaart() {
     }
 
+    public Reiziger getReiziger() {
+        return reiziger;
+    }
+
+    public void setReiziger(Reiziger reiziger) {
+        this.reiziger = reiziger;
+    }
+
+    public List<Product> getProducten() {
+        return producten;
+    }
+
+    public void setProducten(List<Product> producten) {
+        this.producten = producten;
+    }
+
     @Override
     public String toString() {
         return "OVChipkaart{" +
                 "kaart_nummer=" + kaart_nummer +
-                ", geldig_tot=" + geldig_tot +
-                ", klasse=" + klasse +
-                ", saldo=" + saldo +
+//                ", geldig_tot=" + geldig_tot +
+//                ", klasse=" + klasse +
+//                ", saldo=" + saldo +
                 ", reiziger_id=" + reiziger_id +
+//                ", reiziger=" + reiziger +
+                ", producten=" + producten +
                 '}';
     }
 }

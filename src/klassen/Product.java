@@ -1,12 +1,14 @@
 package klassen;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "Product")
 public class Product {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column
     public int product_nummer;
     public String naam;
     public String beschrijving;
@@ -19,7 +21,28 @@ public class Product {
         this.prijs = prijs;
     }
 
+//    @ManyToMany
+//    @JoinTable(name = "ov_chipkaart_product",
+//    joinColumns = {@JoinColumn(name = "kaart_nummer")},
+//            inverseJoinColumns = {@JoinColumn(name = "product_nummer")})
+//    private List<Product> producten = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(
+            name = "ov_chipkaart_product",
+            joinColumns = {@JoinColumn(name = "product_nummer")},
+            inverseJoinColumns={@JoinColumn(name = "kaart_nummer")} )
+    private List<OVChipkaart> ovchipkaarten = new ArrayList<>();
+
     public Product() {
+    }
+
+    public List<OVChipkaart> getOvchipkaarten() {
+        return ovchipkaarten;
+    }
+
+    public void setOvchipkaarten(List<OVChipkaart> ovchipkaarten) {
+        this.ovchipkaarten = ovchipkaarten;
     }
 
     @Override
@@ -29,6 +52,7 @@ public class Product {
                 ", naam='" + naam + '\'' +
                 ", beschrijving='" + beschrijving + '\'' +
                 ", prijs=" + prijs +
+//                ", ovchipkaarten=" + ovchipkaarten +
                 '}';
     }
 }

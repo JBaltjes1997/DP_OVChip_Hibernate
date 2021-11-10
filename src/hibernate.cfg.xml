@@ -13,7 +13,7 @@
 
              <mapping class="klassen.Reiziger"/>
              <mapping class="klassen.Adres"/>
-<!--             <mapping class="klassen.OVChipkaart"/>-->
-<!--             <mapping class="klassen.Product"/>-->
+             <mapping class="klassen.OVChipkaart"/>
+             <mapping class="klassen.Product"/>
         </session-factory>
         </hibernate-configuration>
