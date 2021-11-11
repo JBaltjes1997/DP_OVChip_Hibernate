@@ -21,8 +21,12 @@ public class OVChipkaart {
     @JoinColumn(name = "reiziger_id", insertable = false, updatable = false)
     private Reiziger reiziger;
 
-
-    @ManyToMany(mappedBy = "ov_chipkaart")
+//    @Transient
+    @ManyToMany //(mappedBy = "ov_chipkaart")
+    @JoinTable(
+            name = "ov_chipkaart_product",
+            joinColumns = {@JoinColumn(name = "kaart_nummer")},
+            inverseJoinColumns={@JoinColumn(name = "product_nummer")} )
     private List<Product> producten = new ArrayList<>();
 
     public OVChipkaart(int kaart_nummer, Date geldig_tot, int klasse, double saldo, int reiziger_id) {
@@ -61,7 +65,7 @@ public class OVChipkaart {
 //                ", saldo=" + saldo +
                 ", reiziger_id=" + reiziger_id +
 //                ", reiziger=" + reiziger +
-                ", producten=" + producten +
+//                ", producten=" + producten +
                 '}';
     }
 }

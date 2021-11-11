@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "Product")
+@Table(name = "product")
 public class Product {
     @Id
     @Column
@@ -27,6 +27,7 @@ public class Product {
 //            inverseJoinColumns = {@JoinColumn(name = "product_nummer")})
 //    private List<Product> producten = new ArrayList<>();
 
+//    @Transient
     @ManyToMany
     @JoinTable(
             name = "ov_chipkaart_product",
@@ -49,10 +50,10 @@ public class Product {
     public String toString() {
         return "Product{" +
                 "product_nummer=" + product_nummer +
-                ", naam='" + naam + '\'' +
-                ", beschrijving='" + beschrijving + '\'' +
-                ", prijs=" + prijs +
-//                ", ovchipkaarten=" + ovchipkaarten +
+//                ", naam='" + naam + '\'' +
+//                ", beschrijving='" + beschrijving + '\'' +
+//                ", prijs=" + prijs +
+                ", ovchipkaarten=" + ovchipkaarten +
                 '}';
     }
 }
