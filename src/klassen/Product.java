@@ -21,12 +21,6 @@ public class Product {
         this.prijs = prijs;
     }
 
-//    @ManyToMany
-//    @JoinTable(name = "ov_chipkaart_product",
-//    joinColumns = {@JoinColumn(name = "kaart_nummer")},
-//            inverseJoinColumns = {@JoinColumn(name = "product_nummer")})
-//    private List<Product> producten = new ArrayList<>();
-
 //    @Transient
     @ManyToMany
     @JoinTable(
@@ -36,6 +30,14 @@ public class Product {
     private List<OVChipkaart> ovchipkaarten = new ArrayList<>();
 
     public Product() {
+    }
+
+    public int getProduct_nummer() {
+        return product_nummer;
+    }
+
+    public void setProduct_nummer(int product_nummer) {
+        this.product_nummer = product_nummer;
     }
 
     public List<OVChipkaart> getOvchipkaarten() {

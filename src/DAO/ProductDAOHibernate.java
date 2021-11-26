@@ -2,8 +2,12 @@ package DAO;
 
 import klassen.OVChipkaart;
 import klassen.Product;
+import klassen.Reiziger;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDAOHibernate implements ProductDAO{
@@ -45,11 +49,45 @@ public class ProductDAOHibernate implements ProductDAO{
 
     @Override
     public List<Product> findAll() {
-        return null;
+        Transaction transaction = null;
+        List<Product> producten = new ArrayList<>();
+        try{
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+
+            producten = session.createQuery("FROM Product").list();
+
+            transaction.commit();
+        }
+        catch(HibernateException e){
+            System.out.println(e.getMessage());
+        }
+        return producten;
     }
 
     @Override
     public List<Product> findByOVChipkaart(OVChipkaart ovChipkaart) {
-        return null;
+        Transaction transaction = null;
+        ArrayList<Product> producten = new ArrayList<>();
+        try{
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+
+            producten = (ArrayList<Product>)
+                    session.createQuery("select p.product_nummer, p.naam, p.beschrijving, p.prijs " +
+                    "from Product p" +
+                    " inner join OVChipkaart" +
+                    " where OVChipkaart.kaart_nummer = ?")
+                    .setParameter(0, ovChipkaart.getKaart_nummer()).list();
+
+            transaction.commit();
+
+            return producten;
+        }
+        catch(HibernateException e){
+            System.out.println(e.getMessage());
+            return null;
+        }
+
     }
 }

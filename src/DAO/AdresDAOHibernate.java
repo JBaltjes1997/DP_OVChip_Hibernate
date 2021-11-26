@@ -2,11 +2,17 @@ package DAO;
 
 import klassen.Adres;
 import klassen.Reiziger;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AdresDAOHibernate implements AdresDAO{
+
+    private final Sesseion
+
     @Override
     public void save(Adres adres) {
         try{
@@ -45,11 +51,40 @@ public class AdresDAOHibernate implements AdresDAO{
 
     @Override
     public Adres findByReiziger(Reiziger reiziger) {
-        return null;
+        Transaction transaction = null;
+        try{
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+
+            Adres adres = (Adres) session.createQuery("from Adres where reiziger_id = ?")
+                    .setParameter(0, reiziger.getReiziger_id());
+
+            transaction.commit();
+
+            return adres;
+        }
+        catch(HibernateException e){
+            System.out.println(e.getMessage());
+            return null;
+        }
+
     }
 
     @Override
     public List<Adres> findAll() {
-        return null;
+        Transaction transaction = null;
+        List<Adres> adressen = new ArrayList<>();
+        try{
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+
+            adressen = session.createQuery("FROM Adres").list();
+
+            transaction.commit();
+        }
+        catch(HibernateException e){
+            System.out.println(e.getMessage());
+        }
+        return adressen;
     }
 }

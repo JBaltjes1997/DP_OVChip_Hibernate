@@ -33,6 +33,10 @@ public class Reiziger {
     public Reiziger() {
     }
 
+    public int getReiziger_id() {
+        return reiziger_id;
+    }
+
     public void setAdres(Adres a) {
         adres = a;
     }

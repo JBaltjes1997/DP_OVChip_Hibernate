@@ -48,12 +48,28 @@ public class OVChipkaart {
         this.reiziger = reiziger;
     }
 
+    public int getReiziger_id() {
+        return reiziger_id;
+    }
+
+    public void setReiziger_id(int reiziger_id) {
+        this.reiziger_id = reiziger_id;
+    }
+
+    public void setKaart_nummer(int kaart_nummer) {
+        this.kaart_nummer = kaart_nummer;
+    }
+
     public List<Product> getProducten() {
         return producten;
     }
 
     public void setProducten(List<Product> producten) {
         this.producten = producten;
+    }
+
+    public int getKaart_nummer() {
+        return kaart_nummer;
     }
 
     @Override

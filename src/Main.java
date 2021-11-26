@@ -64,5 +64,21 @@ public class Main {
         }
     }
 
-    private static void testDAOHibernate(){}
+    private static void testDAO_Hibernate(){
+        Session session = getSession();
+        try {
+            Metamodel metamodel = session.getSessionFactory().getMetamodel();
+            for (EntityType<?> entityType : metamodel.getEntities()) {
+                Query query = session.createQuery("from " + entityType.getName());
+
+
+            }
+        } finally {
+            session.close();
+        }
+
+
+        }
+
+    }
 }
