@@ -22,7 +22,7 @@ public class OVChipkaart {
     private Reiziger reiziger;
 
 //    @Transient
-    @ManyToMany //(mappedBy = "ov_chipkaart")
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "ov_chipkaart_product",
             joinColumns = {@JoinColumn(name = "kaart_nummer")},

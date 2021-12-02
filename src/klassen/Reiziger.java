@@ -37,6 +37,10 @@ public class Reiziger {
         return reiziger_id;
     }
 
+    public Date getGeboortedatum() {
+        return geboortedatum;
+    }
+
     public void setAdres(Adres a) {
         adres = a;
     }
@@ -53,16 +57,22 @@ public class Reiziger {
         this.ovchipkaarten = ovchipkaarten;
     }
 
+    public void addOvchipkaart(OVChipkaart ovchipkaart) {
+        if (!ovchipkaarten.contains(ovchipkaart)) {
+            ovchipkaarten.add(ovchipkaart);
+        }
+    }
+
     @Override
     public String toString(){
         return "Reiziger{" +
                 "reiziger_id=" + reiziger_id +
                 ", voorletters='" + voorletters + '\'' +
-//                ", tussenvoegsel='" + tussenvoegsel + '\'' +
-//                ", achternaam='" + achternaam + '\'' +
+                ", tussenvoegsel='" + tussenvoegsel + '\'' +
+                ", achternaam='" + achternaam + '\'' +
 //                ", geboortedatum=" + geboortedatum +
 //                ", adres=" + adres +
-                ", ovchipkaart=" + ovchipkaarten +
+//                ", ovchipkaart=" + ovchipkaarten +
                 '}';
     }
 }
